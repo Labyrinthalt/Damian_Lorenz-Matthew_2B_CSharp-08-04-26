@@ -1,0 +1,83 @@
+using System;
+
+namespace ImmaEatPawns
+{
+    class Program
+    {
+        const int GridWidth = 15;
+        const int GridHeight = 6;
+
+        static void Main(string[] args)
+        {
+            int playerX = GridWidth / 2;
+            int playerY = GridHeight / 2;
+
+            Random rand = new Random();
+            int pawnX = rand.Next(0, GridWidth);
+            int pawnY = rand.Next(0, GridHeight);
+
+            int score = 0;
+            bool running = true;
+
+            Console.WriteLine("Move with W/A/S/D, then press Enter. Type Q to quit.");
+
+            while (running)
+            {
+                if (playerX == pawnX && playerY == pawnY)
+                {
+                    score++;
+                    pawnX = rand.Next(0, GridWidth);
+                    pawnY = rand.Next(0, GridHeight);
+                }
+
+                DrawGrid(playerX, playerY, pawnX, pawnY, score);
+
+                Console.Write("Move: ");
+                string input = Console.ReadLine();
+                input = input == null ? "" : input.Trim().ToLower();
+
+                switch (input)
+                {
+                    case "w": playerY = Math.Max(0, playerY - 1); break;
+                    case "s": playerY = Math.Min(GridHeight - 1, playerY + 1); break;
+                    case "a": playerX = Math.Max(0, playerX - 1); break;
+                    case "d": playerX = Math.Min(GridWidth - 1, playerX + 1); break;
+                    case "q": running = false; break;
+                    default:
+                        Console.WriteLine("Unknown command. Use W, A, S, D or Q.");
+                        break;
+                }
+            }
+
+            Console.WriteLine("Thanks for playing!");
+            Console.WriteLine("closing...");
+        }
+
+        static void DrawGrid(int playerX, int playerY, int pawnX, int pawnY, int score)
+        {
+            try { Console.Clear(); } catch { }
+
+            Console.WriteLine($"Score: {score}");
+
+            for (int y = 0; y < GridHeight; y++)
+            {
+                for (int x = 0; x < GridWidth; x++)
+                {
+                    if (x == playerX && y == playerY)
+                    {
+                        Console.Write('@');
+                    }
+                    else if (x == pawnX && y == pawnY)
+                    {
+                        Console.Write('*');
+                    }
+                    else
+                    {
+                        Console.Write('.');
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
