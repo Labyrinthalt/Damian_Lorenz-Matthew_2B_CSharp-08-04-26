@@ -1,0 +1,77 @@
+using System;
+
+class WhoAreYou
+{
+    static void Main()
+    {
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Enter your age: ");
+        string age = Console.ReadLine(); 
+
+        Console.Write("Enter your address: ");
+        string address = Console.ReadLine(); 
+
+        Console.Write("Enter your weight: ");
+        string weight = Console.ReadLine(); 
+
+        Console.Write("Enter your height: ");
+        string height = Console.ReadLine(); 
+
+        Console.WriteLine();
+        Console.WriteLine($"Hello sir franz, my name is {name}, age {age}, from {address}, and i weigh {weight}kg, and my height is {height}ft");
+    }
+}
+
+
+using System;
+
+class Calculator
+{
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            float result = 0;
+
+            Console.WriteLine("Enter your first number: ");
+            float num1 = float.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter your second number: ");
+            float num2 = float.Parse(Console.ReadLine());
+          
+            Console.WriteLine("Enter Operator (+, -, *, /): ");
+            string op = Console.ReadLine();
+
+            switch (op)
+            {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+                default:
+                    Console.WriteLine("invalid");
+                    break;
+            }
+
+            Console.WriteLine("Result = " + result);
+
+            Console.Write("Do you want to calculate again? (y/n): ");
+            string choice = Console.ReadLine().ToLower();
+            if (choice != "y" && choice != "yes")
+            {
+                Console.WriteLine("Bye Bye!!");
+                break;
+            }
+        }
+    }
+}   
